@@ -1,28 +1,61 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { createGlobalStyle } from 'styled-components/macro';
+import reset from 'styled-reset';
+
+import { Page, NavBar } from './components';
+import Home from './pages/Home';
+import Profile from './pages/Profile';
+
+const GlobalStyle = createGlobalStyle`
+	${reset}
+
+	body {
+		font-family: 'Lato', sans-serif;
+		font-size: 16px;
+		color: white;
+	}
+
+	a {
+		color: white;
+		text-decoration: none;
+
+		&:visited {
+			color: white;
+		}
+	}
+
+	.form-group {
+		margin: 1rem;
+	}
+
+	.form-label {
+		margin-bottom: 0.5rem
+	}
+
+	/* other styles */
+`;
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+	render() {
+		return (
+			<>
+				<GlobalStyle />
+
+				<Page>
+					<Router>
+						<Switch>
+							<Route path="/" exact>
+								<NavBar />
+								<Home />
+							</Route>
+							<Route path="/profile" component={Profile} />
+						</Switch>
+					</Router>
+				</Page>
+			</>
+		);
+	}
 }
 
 export default App;
