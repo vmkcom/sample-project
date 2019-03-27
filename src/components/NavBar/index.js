@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components/macro';
-import { colors, fonts } from '../../theme';
+import { colors, fonts, breakpoints } from '../../theme';
 
 const links = [
 	{
@@ -25,11 +25,18 @@ const NavBar = styled.nav`
 	width: 100%;
 
 	display: flex;
+	flex-shrink: 0;
 	background-color: ${colors.brown};
 
 	align-items: center;
 
 	padding: 0 20px;
+
+
+	@media (max-width: ${breakpoints.mobile}) {
+		justify-content: center;
+		background-color: transparent;
+	}
 `;
 
 const NavLink = styled(Link)`

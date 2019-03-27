@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import styled from 'styled-components/macro';
-import { colors, fonts, styles } from '../../theme';
+import { colors, fonts, styles, breakpoints } from '../../theme';
 
 const Bar = (props) => (
 	<ActionBar>
@@ -18,9 +18,14 @@ const ActionBar = styled.nav`
 	margin: 0 auto;
 
 	display: flex;
+	flex-shrink: 0;
 	background-color: ${colors.brown};
 
 	align-items: center;
+
+	@media (max-width: ${breakpoints.mobile}) {
+		background-color: transparent;
+	}
 `;
 
 const ButtonsContainer = styled.div`

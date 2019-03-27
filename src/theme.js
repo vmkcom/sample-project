@@ -33,3 +33,50 @@ export const styles = {
 		line-height: 0;
 	`
 };
+
+export const breakpoints = {
+	tablet: '768px',
+	desktop: '1024px',
+	mobile: '520px',
+};
+
+
+export const formStyles = `
+	text-align: center;
+
+	.was-validated {
+		*:invalid {
+			border-color: red;
+		}
+	}
+
+	.form-group {
+		margin: 1rem;
+
+	}
+
+	.form-row {
+		margin: 0;
+
+		@media (max-width: ${breakpoints.mobile}) {
+			display: flex;
+			align-items: center;
+			flex-direction: column;
+
+		}
+	}
+
+	.form-label {
+		margin-bottom: 0.5rem
+	}
+
+
+	form {
+		@media (max-width: ${breakpoints.mobile}) {
+			display: flex;
+			align-items: center;
+			flex-direction: column;
+
+		}
+	}
+`;

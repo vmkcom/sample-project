@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
-import { PageContainer, Button } from '../../../components';
+import { PageContainer, SubmitButton } from '../../../components';
 import styled from 'styled-components/macro';
-
 import Form from 'react-bootstrap/Form';
 
 import { countries } from './data/countries';
 
 class Step2 extends Component {
 	state = {
-		country: '',
+		country: 'Australia',
 		termsConfirmed: false,
+		validated: false,
 	}
 
 	updateForm = (e) => {
@@ -18,17 +18,29 @@ class Step2 extends Component {
 		});
 	}
 
-	onSubmit = () => {
-		this.props.onFinish(this.state);
+	onSubmit = (e) => {
+		const form = e.currentTarget;
+		const {validated, ...formData} = this.state;
+		e.stopPropagation();
+		e.preventDefault();
+
+		if (form.checkValidity() === true) {
+			this.props.onFinish(formData);
+		}
+
+		this.setState({validated: true});
 	}
 
 	render() {
-		const { country, termsConfirmed } = this.state;
+		const { country, termsConfirmed, validated } = this.state;
 
 		return (
 			<PageContainer>
 				<h3>Complete Your Profile</h3>
-				<Form>
+				<Form noValidate
+					validated={validated}
+					onSubmit={this.onSubmit}
+				>
 					<HalfRow>
 						<Form.Group controlId="country">
 							<Form.Label>Country</Form.Label>
@@ -38,9 +50,9 @@ class Step2 extends Component {
 						</Form.Group>
 					</HalfRow>
 					<Form.Group controlId="termsConfirmed">
-						<Form.Check type="checkbox" label="I agree to terms and conditions" value={termsConfirmed} onChange={this.updateForm} />
+						<Form.Check required type="checkbox" label="I agree to terms and conditions" value={termsConfirmed} onChange={this.updateForm} />
 					</Form.Group>
-					<CenteredButton span onClick={this.onSubmit}>
+					<CenteredButton>
 						Submit
 					</CenteredButton>
 				</Form>
@@ -51,7 +63,7 @@ class Step2 extends Component {
 
 export default Step2;
 
-const CenteredButton = styled(Button)`
+const CenteredButton = styled(SubmitButton)`
 	margin: 20px auto;
 `;
 

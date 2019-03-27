@@ -1,15 +1,6 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components/macro';
-import { colors, fonts, styles } from '../../theme';
-
-export default (props) => {
-	return (
-		<Button as={props.span ? 'span' : ''} {...props}>
-			{props.children}
-		</Button>
-	);
-};
+import { colors, styles } from '../../theme';
 
 const Button = styled(Link)`
 	${styles.button}
@@ -23,3 +14,12 @@ const Button = styled(Link)`
 		text-decoration: none;
 	}
 `;
+
+const SubmitButton = styled(Button).attrs({
+	as: 'button',
+	type: 'submit'
+})``;
+
+export default Button;
+
+export { SubmitButton };

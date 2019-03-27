@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
-import { PageContainer, ActionBar } from '../../components';
+import { breakpoints } from '../../theme';
+import { PageContainer, ActionBar, SideBar } from '../../components';
 
 import { Intro, Step1, Step2, Done } from './scenes';
 import { submitProfile } from '../../api/profile';
+
+import styled from 'styled-components/macro';
 
 
 class Profile extends Component {
@@ -26,7 +29,10 @@ class Profile extends Component {
 
 			let data = this.state;
 			submitProfile(data, (response) => {
-				this.props.history.push('/profile/done');
+				if (response.data && response.data.id) {
+					this.props.history.push('/profile/done');
+				}
+
 			});
 		});
 	}
@@ -43,7 +49,8 @@ class Profile extends Component {
 					</Route>
 
 				</Switch>
-				<PageContainer>
+				<SidebarLayout>
+					<StyledSideBar />
 					<Switch>
 						<Route path="/profile/intro" component={Intro} />
 						<Route path="/profile/step1">
@@ -57,10 +64,28 @@ class Profile extends Component {
 							<Redirect to="/profile/intro" />
 						</Route>
 					</Switch>
-				</PageContainer>
+				</SidebarLayout>
 			</>
 		);
 	}
 }
+
+const SidebarLayout = styled.div`
+	display: flex;
+
+	justify-content: center;
+
+	@media (max-width: ${breakpoints.mobile}) {
+		flex-direction: column;
+		height: 100%;
+	}
+`;
+
+const StyledSideBar = styled(SideBar)`
+	@media (max-width: ${breakpoints.mobile}) {
+		order: 1;
+		align-self: center;
+	}
+`;
 
 export default withRouter(Profile);

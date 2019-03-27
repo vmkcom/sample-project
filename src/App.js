@@ -6,9 +6,12 @@ import reset from 'styled-reset';
 import { Page, NavBar } from './components';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
+import { formStyles } from './theme';
 
 const GlobalStyle = createGlobalStyle`
 	${reset}
+	${formStyles}
+
 
 	body {
 		font-family: 'Lato', sans-serif;
@@ -23,14 +26,6 @@ const GlobalStyle = createGlobalStyle`
 		&:visited {
 			color: white;
 		}
-	}
-
-	.form-group {
-		margin: 1rem;
-	}
-
-	.form-label {
-		margin-bottom: 0.5rem
 	}
 
 	/* other styles */
