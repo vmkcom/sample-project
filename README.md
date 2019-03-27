@@ -1,3 +1,15 @@
+# Sample project
+
+## Running
+
+`npm i`
+
+and
+
+`npm start`
+
+Mobile layout activated for screens less than 520px width
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
