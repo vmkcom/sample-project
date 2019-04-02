@@ -25,14 +25,16 @@ class Profile extends Component {
 	}
 
 	submitForm = (values) => {
-		this.setState(values, () => {
+		return new Promise(resolve => {
+			this.setState(values, () => {
+				let data = this.state;
+				submitProfile(data, (response) => {
+					if (response.data && response.data.id) {
+						this.props.history.push('/profile/done');
+					}
 
-			let data = this.state;
-			submitProfile(data, (response) => {
-				if (response.data && response.data.id) {
-					this.props.history.push('/profile/done');
-				}
-
+					resolve(response.data);
+				});
 			});
 		});
 	}
@@ -70,7 +72,7 @@ class Profile extends Component {
 	}
 }
 
-const SidebarLayout = styled.div`
+export const SidebarLayout = styled.div`
 	display: flex;
 
 	justify-content: center;

@@ -26,7 +26,7 @@ const SideBar = styled.ul`
 	}
 `;
 
-const MenuItem = styled.li`
+export const MenuItem = styled.li`
 	height: 60px;
 	line-height: 0;
 	display:flex;

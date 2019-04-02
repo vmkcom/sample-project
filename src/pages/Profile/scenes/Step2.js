@@ -25,7 +25,7 @@ class Step2 extends Component {
 		e.preventDefault();
 
 		if (form.checkValidity() === true) {
-			this.props.onFinish(formData);
+			return this.props.onFinish(formData);
 		}
 
 		this.setState({validated: true});
